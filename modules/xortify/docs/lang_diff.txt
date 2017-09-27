@@ -1,0 +1,4 @@
+========================================
+ 2011/11/03 07:20:00 Version 1.18 STABLE
+========================================
+ - Added language/english/help folder & files added with documents (Wishcraft)

@@ -1,0 +1,11 @@
+Credits
+=============
+Pre-emtive Detection
+ * Stop Forum Spam - Special Thanks to Paul
+ * Project Honeypot 
+ 
+Anti hacking Detection
+ * GIJOE, Trabis and all contributor to protector
+ 
+IP Ban/Unban cloud
+ * Chronolabs Co-op - Simon Roberts (wishcraft)

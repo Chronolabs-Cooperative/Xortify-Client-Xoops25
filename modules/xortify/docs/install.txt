@@ -1,0 +1,75 @@
++-----------------------------------------------------------------------------------+
+|                                                                                   |
+|          XXX   XXX  OOOOO   RRRRR  TTTTTT IIIIII  FFFFFF YYY    YYY               |
+|            XX XX   OO   OO  RR  RR   TT     II    FF       YY  YY                 |
+|             XXX    OO   OO  RRRR     TT     II    FFFF      YYYY                  |
+|            XX XX   OO   OO  RR RR    TT     II    FF         YY                   |
+|          XXX   XXX  OOOOO   RR  RR   TT   IIIIII  FF         YY     version 2.48  |
+|                                                                                   |
++----[ NETWORK SECTOR SECURITY ]----------------------------------------------------+
+|                                                                                   |
+|  Install the Providers Xortify support currently these are:                       |
+|                                                                                   |
+|    * XOOPS Protector (Based in 3.22)                                              |
+|    * Xortify Network Security Drone                                               |
+|                                                                                   |
+|  Sign up a username for Xortify.com you can do this in the module if everything   |
+|  is working fine and there isn't any problem with the API SOAP communications.    |
+|                                                                                   |
+|  You will recieve an activation notice but you account will already be active.    |
+|                                                                                   |
+|  You will need to alter mainfile.php and do the following::                       |
+|                                                                                   |
+|     * DO NOT INSTALL PROTECTOR IN THE MAINFILE - Xortify will call this for you   |
+|                                                                                   |
+|  Xortify is also fited with the XOOPS 2.4 Series Preloads you will not need to    |
+|  do steps 2 and 3 with XOOPS 2.4 and later series.                                |
+|                                                                                   |
++--[ Step 1 - Installing Cron ]-----------------------------------------------------+
+|                                                                                   |
+|  You will need to install the following cron within your cronjobs section of your |
+|  Wesite, if you are using a windows server in WAMP then you will need to schedule |
+|  this as a task, remember to change the path to suit your configuration.          |
+|                                                                                   |
+| command to run every minute to once an hour, make sure it is within your cache    |
+| refresh time. This is the or unix based systems the following is for windows      |
+|                                                                                   |
+|  /usr/bin/php -q /home/yoursite/public_html/modules/xortify/cron/serverup.php     |
+|                                                                                   |
+| Assuming you have your PHP added to your executable path this is the scheduled    |
+| task to run on a windows environment.                                             |
+|                                                                                   |
+|  php.exe -q c:\htdocs\modules\xortify\cron\serverup.php      		                |
+|                                                                                   |
+| Some of the paths in these examples for executables or the cron file may be       |
+| different and you will have to alter them to your needs.	                        |
+|                                                                                   |
++--[ Step 2 - mainfile.php (pre 2.4 series) ]---------------------------------------+
+|                                                                                   |
+|  You will need to change the following the main file has the following code on it |
+|                                                                                   |
+| [code]                                                                            |
+|  if (!isset($xoopsOption["nocommon"]) && XOOPS_ROOT_PATH != "") {                 |
+|      include XOOPS_ROOT_PATH."/include/common.php";                               |
+|  }                                                                                |
+| [/code]                                                                           |
+|                                                                                   |
+| You will need to alter that to this after it is all install.                      |
+|                                                                                   |
+| [code]                                                                            |
+|  @include( XOOPS_ROOT_PATH.'/modules/xortify/include/pre.loader.mainfile.php' );  |
+|  if (!isset($xoopsOption["nocommon"]) && XOOPS_ROOT_PATH != "") {                 |
+|      include XOOPS_ROOT_PATH."/include/common.php";                               |
+|   }                                                                               |
+|  @include( XOOPS_ROOT_PATH.'/modules/xortify/include/post.loader.mainfile.php' ); |
+| [/code]                                                                           |
+|                                                                                   |
++--[ Step 3 - header.php  (pre 2.4 series) ]----------------------------------------+
+|                                                                                   |
+|  Below the lin of footer.php which reads $xoopsTpl = $xoTheme->template;         |
+|                                                                                   |
+|  [code]                                                                           |
+|    @include( XOOPS_ROOT_PATH.'/modules/xortify/include/post.add.meta.php' );      |
+|  [/code]                                                                          |
+|                                                                                   |
++-----------------------------------------------------------------------------------+

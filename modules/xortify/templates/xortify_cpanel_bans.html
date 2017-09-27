@@ -1,0 +1,36 @@
+<{if $pagenav}>
+<div style="height:45px; clear:both;">
+	<div style="float:right; clear:both;"><{$pagenav}></div>
+</div>
+<{/if}>
+<table width="100%">
+<tr class="head">
+	<td><{$smarty.const._XS_AM_IPTYPE}></td>
+   	<td><{$smarty.const._XS_AM_IPADDRESS}></td>
+   	<td><{$smarty.const._XS_AM_NETADDRESS}></td>
+   	<td><{$smarty.const._XS_AM_PROXYIP}></td>
+   	<td><{$smarty.const._XS_AM_MACADDRESS}></td>
+   	<td><{$smarty.const._XS_AM_LONG}></td>
+   	<td><{$smarty.const._XS_AM_CATEGORY}></td>    
+</tr>
+<{foreach item=ban from=$bans}>
+<tr class="<{cycle values="even,odd"}>">
+	<td><{$ban.iptype}></td>
+   	<td><{$ban.ipaddy}></td>
+   	<td><{$ban.netaddy}></td>
+   	<td><{$ban.proxyip}></td>
+   	<td><{$ban.macaddy}></td>
+   	<td><{$ban.long}></td>
+   	<td><{$ban.category.category_name}> (<{$ban.category.category_type}>)</td>    
+</tr>
+<{foreach item=comment from=$ban.comments}>
+<{if !empty($comment.com_text)}>
+<tr class="<{cycle values="foot,head"}>">
+	<td>&nbsp;</td>
+	<td><{$smarty.const._XS_AM_BANID}>&nbsp;<a href='<{$cloudurl}>/ban/index.php?op=member&id=<{$comment.com_itemid}>'>#<{$comment.com_itemid}></a></td>
+   	<td colspan='5'><{$comment.com_text}></td>
+</tr>
+<{/if}>
+<{/foreach}>
+<{/foreach}>
+</table>
